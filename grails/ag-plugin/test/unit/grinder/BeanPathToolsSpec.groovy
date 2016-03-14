@@ -1,6 +1,9 @@
 package grinder
 
+import grails.converters.JSON
 import org.codehaus.groovy.grails.commons.DefaultGrailsDomainClass
+import org.springframework.http.MediaType
+import org.springframework.mock.web.MockHttpServletRequest
 import spock.lang.Specification
 
 class BeanPathToolsSpec extends Specification {
@@ -97,6 +100,23 @@ class BeanPathToolsSpec extends Specification {
         'value'                 | [value: 10]
         'fooValues.*'           | [fooValues: [[id: 1, bar: null, foo: 'val 1'], [id: 2, bar: null, foo: 'val 2']]]
     }
+
+	def "Editeddate and created dates are ignored"() {
+		setup:
+		MockHttpServletRequest request = new MockHttpServletRequest()
+		request.addHeader('Accept', 'application/json')
+		request.method = 'POST'
+		request.requestURI = '/some/url'
+		request.contentType = MediaType.APPLICATION_JSON
+		when:
+		def result = BeanPathTools.flattenMap(request,  [id:9, value:10,editedDate: new Date() + 1, createdDate: new Date()])
+		then:
+		result.editedDate == null
+		result.createdDate == null
+		result.id == "9"
+		result.value == "10"
+
+	}
 
 
     class TestClazzA {

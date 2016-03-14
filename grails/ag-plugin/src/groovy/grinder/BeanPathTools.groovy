@@ -157,13 +157,13 @@ class BeanPathTools {
     static GrailsParameterMap flattenMap(request, jsonMap = null){
         def p = new MapFlattener().flatten(jsonMap ?: request.JSON)
         //XXX a hack to remove the edited/created fields. not sure why they are being binded
-        p.each{ entry ->
+        p = p.findAll{ entry ->
             def key = entry.key
-            if (entry.key.endsWith('createdDate') || entry.key.endsWith('editedDate')){
-                entry.value = null
+            if (key.endsWith('createdDate') || key.endsWith('editedDate')){
+                return false
             }
+			true
         }
-        //println "flat map $p"
         def gpm =  new GrailsParameterMap(p,request)
         gpm.updateNestedKeys(p)
         return gpm
