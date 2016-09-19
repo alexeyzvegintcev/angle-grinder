@@ -8,7 +8,13 @@
         <span ng-switch-when="false">Create New ${entityName}</span>
     </h3>
 </div>
-
+<div class="modal-body" ng-controller="user.FormCtrl" style="height:60%; overflow:auto;">
+  <form ng-submit="save(user)" name="userForm" novalidate>
+    <formly-form model="user" fields="fields.userFields">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </formly-form>
+  </form>
+</div>
 <form name="editForm" class="form-horizontal" novalidate
       ag-server-validation-errors
       ng-submit="save(user)">

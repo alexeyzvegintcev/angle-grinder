@@ -10,7 +10,7 @@
     "select2": "~3.4.8",
     "select2-bootstrap-css": "~1.4.6",
     "font-awesome": "~4.3.0",
-    "angular": "1.4.7",
+    "angular": "^1.5.8",
     "angular-animate": "1.4.7",
     "angular-route": "1.4.7",
     "angular-resource": "1.4.7",
@@ -32,7 +32,10 @@
     "angular-toastr": "~1.7.0",
     "toastr": "~2.1.2",
     "angular-sweetalert": "~1.1.0",
-    "angular-ui-grid": "~3.1.1"
+    "angular-ui-grid": "~3.1.1",
+    "api-check": "^7.5.5",
+    "angular-formly": "^8.4.0",
+    "angular-formly-templates-bootstrap": "^6.3.2"
   },
   "devDependencies": {
     "angular-mocks": "1.4.7"

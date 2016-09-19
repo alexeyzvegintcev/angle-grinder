@@ -28,6 +28,9 @@ module.exports =
     "components/bower/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
     "components/bower/toastr/toastr.js"
     "components/bower/sweetalert/dist/sweetalert-dev.js"
+    "components/bower/api-check/dist/api-check.js"
+    "components/bower/angular-formly/dist/formly.js"
+    "components/bower/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"
 
     "grails/ag-plugin/web-app/angleGrinder/js/application.js"
     "grails/ag-plugin/web-app/angleGrinder/js/modules/resources.js"

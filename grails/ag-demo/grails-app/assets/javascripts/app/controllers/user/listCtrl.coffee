@@ -2,7 +2,7 @@ class ListCtrl
 
   @$inject = ["$scope", "$log", "Resource", "$filter", "DialogCrudCtrlMixin", "pathWithContext", "$http", 'uiGridConstants']
   constructor: ($scope, $log, Resource, @$filter, DialogCrudCtrlMixin, pathWithContext, $http, uiGridConstants) ->
-
+    $scope.fields = {}
     $scope.gridOptions =
       path: "/user/list?format=json"
       colModel: @colModel()

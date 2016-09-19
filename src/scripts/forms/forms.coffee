@@ -20,7 +20,7 @@ angular.module("ui.bootstrap.datepicker").config [
       return $delegate
     ]
 ]
-
+#XXX should be reviewed and refactored
 forms = angular.module("angleGrinder.forms", [
   "ui.bootstrap.collapse"
   "ui.bootstrap.accordion"
@@ -41,6 +41,8 @@ forms = angular.module("angleGrinder.forms", [
   "xeditable"
   "angleGrinder.common"
   "angleGrinder.alerts"
+  "formly"
+  "formlyBootstrap"
 ])
 
 forms.run [
@@ -73,4 +75,87 @@ forms.run [
           <div class="tooltip-inner" ng-bind="title"></div>
         </div>
       """
+      $templateCache.put 'datepicker.html',
+                       """
+        <ag-datepicker date-type="date"
+                           ng-model="model"
+
+                           name="datepick"/>
+                </ag-datepicker>
+      """
+]
+
+forms.run [ "formlyConfig",
+  (formlyConfig) ->
+    attributes = [
+      'date-disabled'
+      'custom-class'
+      'show-weeks'
+      'starting-day'
+      'init-date'
+      'min-mode'
+      'max-mode'
+      'format-day'
+      'format-month'
+      'format-year'
+      'format-day-header'
+      'format-day-title'
+      'format-month-title'
+      'year-range'
+      'shortcut-propagation'
+      'datepicker-popup'
+      'show-button-bar'
+      'current-text'
+      'clear-text'
+      'close-text'
+      'close-on-date-selection'
+      'datepicker-append-to-body'
+    ]
+    bindings = [
+      'datepicker-mode'
+      'min-date'
+      'max-date'
+    ]
+    ngModelAttrs = {}
+
+    camelize = (string) ->
+      string = string.replace(/[\-_\s]+(.)?/g, (match, chr) ->
+        if chr then chr.toUpperCase() else ''
+      )
+      # Ensure 1st char is always lowercase
+      string.replace /^([A-Z])/, (match, chr) ->
+        if chr then chr.toLowerCase() else ''
+
+    angular.forEach attributes, (attr) ->
+      ngModelAttrs[camelize(attr)] = attribute: attr
+      return
+    angular.forEach bindings, (binding) ->
+      ngModelAttrs[camelize(binding)] = bound: binding
+      return
+    console.log ngModelAttrs
+    formlyConfig.setType
+      name: 'datepicker'
+      templateUrl: 'datepicker.html'
+      wrapper: [
+        'bootstrapLabel'
+        'bootstrapHasError'
+      ]
+      defaultOptions:
+        ngModelAttrs: ngModelAttrs
+        templateOptions: datepickerOptions:
+          format: 'MM.dd.yyyy'
+          initDate: new Date
+      controller: [
+        '$scope'
+        ($scope) ->
+          $scope.datepicker = {}
+          $scope.datepicker.opened = false
+
+          $scope.datepicker.open = ($event) ->
+            $scope.datepicker.opened = !$scope.datepicker.opened
+            return
+
+          return
+      ]
+    return
 ]
