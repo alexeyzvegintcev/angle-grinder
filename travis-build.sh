@@ -2,15 +2,15 @@
 
 echo "### Running tests"
 
-bower cache clean &&
-
-cd script && ./jenkins-build-unit
+grunt test --browsers=PhantomJS
+# capture the results
+RESULT=$?
 # capture the results
 RESULT=$?
 if [$RESULT > 0]; then
   exit $RESULT
 fi
-cd ../grails/ag-plugin && ./gradlew test
+cd grails/ag-plugin && ./gradlew test
 # capture the results
 RESULT=$?
 
