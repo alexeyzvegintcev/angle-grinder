@@ -1,18 +1,25 @@
 language:
-  - ruby
+  - groovy
   - node_js
 
+jdk:
+  - oraclejdk8
+
+sudo: false
+
 node_js:
-  - 0.10.7
+  - 0.10.25
+
+cache:
+  directories:
+  - $HOME/.m2
 
 before_install:
   - npm install grunt-cli bower -g
   - npm install
   - bower install
-  - gem install compass
 
-  # install Selenium
-  - ./node_modules/protractor/bin/install_selenium_standalone
+before_script:
+ - rm -rf dao-app/.gradle
 
-script:
-  - DISPLAY=:99.0 grunt test:ci
+script: "./travis-build.sh"
