@@ -2,6 +2,8 @@
 
 echo "### Running tests"
 
+bower cache clean &&
+
 cd script && ./jenkins-build-unit
 # capture the results
 RESULT=$?

@@ -24,6 +24,5 @@ before_script:
  - rm -rf grails/ag-plugin/.gradle
  - rm -rf $HOME/tmp
  - bower cache clean
- - bower update
 
 script: "./travis-build.sh"
