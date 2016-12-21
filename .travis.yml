@@ -22,7 +22,7 @@ before_install:
 
 before_script:
  - rm -rf grails/ag-plugin/.gradle
- - rm -rf $HOME/tmp
+ - rm -rf /tmp
  - bower cache clean
 
 script: "./travis-build.sh"
