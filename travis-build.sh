@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "### Running tests"
-
+bower install
 grunt test --browsers=PhantomJS
 # capture the results
 RESULT=$?
