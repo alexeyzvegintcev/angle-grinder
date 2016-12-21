@@ -3,7 +3,18 @@
 echo "### Running tests"
 
 cd script && ./jenkins-build-unit
+# capture the results
+RESULT=$?
+if [$RESULT > 0]; then
+  exit $RESULT
+fi
 cd ../grails/ag-plugin && ./gradlew test
+# capture the results
+RESULT=$?
+
+if [$RESULT > 0]; then
+  exit $RESULT
+fi
 
 echo "### Running publishing"
 

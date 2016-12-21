@@ -20,6 +20,6 @@ before_install:
   - bower install
 
 before_script:
- - rm -rf dao-app/.gradle
+ - rm -rf grails/ag-plugin/.gradle
 
 script: "./travis-build.sh"
