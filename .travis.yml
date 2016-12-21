@@ -13,7 +13,6 @@ node_js:
 cache:
   directories:
   - $HOME/.m2
-  - $HOME/tmp
 
 before_install:
   - npm install grunt-cli bower -g
@@ -22,7 +21,7 @@ before_install:
 
 before_script:
  - rm -rf grails/ag-plugin/.gradle
- - rm -rf /tmp
+ - rm -rf /tmp/travis/bower
  - bower cache clean
 
 script: "./travis-build.sh"
