@@ -1,5 +1,6 @@
 package grinder
-import org.springframework.context.i18n.LocaleContextHolder as LCH
+
+
 import javax.annotation.PostConstruct
 import grails.util.GrailsNameUtils
 
@@ -9,14 +10,15 @@ class GrinderLabelService {
 	static transactional = false
 
 	def grailsApplication
-	def messageSource 
+	def messageSource
 
 	//setup in init
 	def gTagLib
 
 	@PostConstruct
 	def init(){
-    	gTagLib = grailsApplication.mainContext.getBean('org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib');
+
+    	gTagLib = grailsApplication.mainContext.getBean('org.grails.plugins.web.taglib.ApplicationTagLib');
 	}
 
     def columnSetup(List colModel, Class baseClass = null) {
@@ -45,8 +47,8 @@ class GrinderLabelService {
     /**
      * a propPath of arTran.customer.name will look for the followingkeys with the following order
      * [arTran.customer.name.label , customer.name.label , name.label , default.name.label]
-     * 
-     * if passed in value starts with default then it just adds label to the end passes to 
+     *
+     * if passed in value starts with default then it just adds label to the end passes to
      */
     String resolveLabel(String propPath){
     	//skip the labelKey build if it starts with default
@@ -54,7 +56,7 @@ class GrinderLabelService {
     		def lbl = propPath.endsWith('.label') ? propPath : "${propPath}.label"
     		return resolveMessage([lbl], GrailsNameUtils.getNaturalName(propPath))
     	}else{
-    		def lblList = getLabelKeys(propPath) 
+    		def lblList = getLabelKeys(propPath)
 			return resolveMessage(lblList, GrailsNameUtils.getNaturalName(propPath))
     	}
     }
@@ -62,8 +64,8 @@ class GrinderLabelService {
     /**
      * a propPath of arTran.customer.name will look for the followingkeys with the following order
      * [arTran.customer.name.label , customer.name.label , name.label, default.name.label]
-     * 
-     * if passed in value starts with default then it just adds label to the end passes to 
+     *
+     * if passed in value starts with default then it just adds label to the end passes to
      */
     List<String> getLabelKeys(String propPath) {
 		def lblList = [
@@ -72,7 +74,7 @@ class GrinderLabelService {
 		def subPath = propPath
 		int i = propPath.indexOf(".")
 
-		if(i == -1) 
+		if(i == -1)
 			lblList.add("default.${subPath}.label")
 
         while (i > -1) {
