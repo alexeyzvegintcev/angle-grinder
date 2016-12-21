@@ -12,7 +12,7 @@ bower install
 ./script/xvfb start
 
 # run the specs
-grunt test --browsers=PhantomJS,Chrome
+grunt test --browsers=PhantomJS
 # capture the results
 RESULT=$?
 
