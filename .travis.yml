@@ -17,12 +17,12 @@ cache:
 before_install:
   - npm install grunt-cli bower -g
   - npm install
-  - bower install
 
 before_script:
  - rm -rf grails/ag-plugin/.gradle
  - rm -rf components/bower
  - rm -rf /tmp/travis/bower
- - 'bower cache clean'
+ - bower cache clean
+ - bower install
 
 script: "./travis-build.sh"
