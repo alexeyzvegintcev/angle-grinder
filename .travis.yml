@@ -21,7 +21,8 @@ before_install:
 
 before_script:
  - rm -rf grails/ag-plugin/.gradle
+ - rm -rf components/bower
  - rm -rf /tmp/travis/bower
- - bower cache clean
+ - 'bower cache clean'
 
 script: "./travis-build.sh"
