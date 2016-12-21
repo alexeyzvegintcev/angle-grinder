@@ -23,7 +23,6 @@ before_script:
  - rm -rf components/bower
  - rm -rf /tmp/travis/bower
  - bower cache clean
- - bower install
 
 matrix:
   fast_finish: true
