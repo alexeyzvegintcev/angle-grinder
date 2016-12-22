@@ -3,8 +3,8 @@
 echo "### Running tests"
 bower install && grunt test --browsers=PhantomJS
 # capture the results
-RESULT=$?
-if [$RESULT == 0];
+RESULT=$1
+if [[$RESULT == 0]];
 then
   echo "JS tests passed"
 else
