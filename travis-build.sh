@@ -4,17 +4,21 @@ echo "### Running tests"
 bower install && grunt test --browsers=PhantomJS
 # capture the results
 RESULT=$?
-if $RESULT -gt 0
+if [$RESULT == 0]
 then
-  exit $RESULT
+  echo "JS tests passed"
+else
+exit $RESULT
 fi
 cd grails/ag-plugin && ./gradlew test
 # capture the results
 RESULT=$?
 
-if $RESULT -gt 0
+if [$RESULT == 0]
 then
-  exit $RESULT
+  echo "Grails tests passed"
+else
+exit $RESULT
 fi
 
 echo "### Running publishing"
