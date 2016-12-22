@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "### Running tests"
-bower install && grunt test --browsers=PhantomJS; export RESULT=$?
+bower cache clean && bower install && grunt test --browsers=PhantomJS; export RESULT=$?
 echo $RESULT
 if [[ "$RESULT" == 0 ]]; then
   echo "JS tests passed"
